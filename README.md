@@ -1,6 +1,21 @@
-![silica-brand](exports/banners/silica-brand.png)
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="exports/logotype/silica-logotype-horizontal-dark.svg">
+    <img alt="Silica" src="exports/logotype/silica-logotype-horizontal-light.svg" width="200">
+  </picture>
+</p>
 
-# silica-brand
+<h1 align="center">silica-brand</h1>
+
+<p align="center">
+  <b>The brand of Silica.</b><br>
+  The logo, the logotype and the repository headers.
+</p>
+
+<p align="center">
+  <img alt="license: to be decided" src="https://img.shields.io/badge/license-to%20be%20decided-8a8a8a?style=flat-square">
+</p>
+
 
 The brand of [Silica](https://github.com/silica-linux/silica-desktop): the logo (with the name set
 in Inter), the repository banners and, later, the release wallpapers. Every file has its row in
