@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "id": "silica",
+  "name": "Silica",
+  "kind": "app",
+  "keyline": "square",
+  "layers": [
+    {
+      "role": "background",
+      "file": "background.svg"
+    },
+    {
+      "role": "foreground",
+      "file": "foreground.svg",
+      "shadow": "neutral"
+    }
+  ],
+  "variants": {
+    "dark": {
+      "background": "background-dark.svg",
+      "foreground": "foreground-dark.svg"
+    }
+  },
+  "dynamic": null
+}

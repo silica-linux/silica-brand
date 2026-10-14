@@ -1,0 +1,4 @@
+fonttools
+uharfbuzz
+resvg-py
+pillow
