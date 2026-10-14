@@ -18,7 +18,7 @@
 
 
 The brand of [Silica](https://github.com/silica-linux/silica-desktop): the logo (with the name set
-in Inter), the repository banners and, later, the release wallpapers. Every file has its row in
+in Inter), the repository banners and the desktop wallpapers. Every file has its row in
 `ASSETS.md` (author, licence, source).
 
 Clean-room rules as in silica-icons: no shape that recalls the marks of other systems.
@@ -45,6 +45,8 @@ exports/
   mark/          flat mark SVGs: colour light, colour dark, mono (currentColor), black, white;
                  pixel-drawn 16, 24 and 32 px variants
   banners/       GitHub banners, 1280 × 640, one per repository (SVG and PNG)
+  wallpapers/    the default desktop wallpaper, light and dark, 2560 × 1440 and @2x (PNG),
+                 with its recipe in wallpapers.json (gradient, glows, blur)
   construction/  construction drawing and clear space of the flat mark
 design/
   silica-brand.sketch   pages Construction, Mark, Wordmark, App Icon, Banners

@@ -1,0 +1,23 @@
+{
+  "canvas": { "width": 2560, "height": 1440 },
+  "note": "Base: linear gradient from top-left (0,0) to bottom-right (1,1). Glows: ellipses filled with a flat sRGB colour (alpha in the hex), Gaussian blur radius 220 px at 2560 x 1440, clipped to the canvas. Frames in px at 2560 x 1440 (x, y, width, height); scale them with the canvas.",
+  "light": {
+    "base": [[0.0, "#8ec5ff"], [0.5, "#f9c6d9"], [1.0, "#ffe2b0"]],
+    "glows": [
+      { "frame": [-300, 420, 1500, 1000], "color": "#6fe0b0cc" },
+      { "frame": [1400, -380, 1500, 1100], "color": "#a48bffb3" },
+      { "frame": [800, 760, 1300, 900], "color": "#ffb07ab3" },
+      { "frame": [1900, 900, 1000, 800], "color": "#7cc4ffb3" }
+    ]
+  },
+  "dark": {
+    "base": [[0.0, "#0b1030"], [0.55, "#2a1446"], [1.0, "#0a2a2e"]],
+    "glows": [
+      { "frame": [-300, 420, 1500, 1000], "color": "#1f8a6ecc" },
+      { "frame": [1400, -380, 1500, 1100], "color": "#5b3fd0cc" },
+      { "frame": [800, 760, 1300, 900], "color": "#c2456a99" },
+      { "frame": [1900, 900, 1000, 800], "color": "#1a5fb099" }
+    ]
+  },
+  "blur_radius": 220
+}
