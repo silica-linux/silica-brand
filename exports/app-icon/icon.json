@@ -3,7 +3,7 @@
   "id": "silica",
   "name": "Silica",
   "kind": "app",
-  "keyline": "square",
+  "keyline": "circle",
   "layers": [
     {
       "role": "background",

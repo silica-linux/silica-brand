@@ -17,8 +17,8 @@ import resvg_py
 from PIL import Image, ImageChops, ImageDraw
 
 import lockup
-from geometry import SMALL, build, master, num
-from marks import INK, PAPER, mark_body, mark_svg, spec_for, svg
+from geometry import GRID, SMALL, column_x, glass_path, grain_path, master, num
+from marks import INK, PAPER, PALETTE, mark_body, mark_for, mark_svg, svg
 from text import Inter
 
 PNG_SIZES = (16, 32, 64, 128, 256, 512, 1024)
@@ -60,7 +60,7 @@ def marks(out: Path) -> None:
             write(d / f"silica-mark-{px}-{mode}.svg", mark_svg(SMALL[px], mode))
     for mode in ("light", "dark"):
         for px in PNG_SIZES:
-            im = render(mark_svg(spec_for(px), mode, px=px), px)
+            im = render(mark_svg(mark_for(px), mode, px=px), px)
             p = out / "png" / f"silica-mark-{mode}-{px}.png"
             p.parent.mkdir(parents=True, exist_ok=True)
             im.save(p)
@@ -99,13 +99,12 @@ def banner_svg(inter: Inter, repo: str, desc: str) -> str:
         '</linearGradient></defs>',
         f'<rect width="{w}" height="{h}" fill="url(#bg)"/>',
     ]
-    m = build(master())
-    bx0, by0, bx1, by1 = m.bbox
-    big = 560.0
-    s = big / (by1 - by0)
+    m = master()
+    big = 600.0
+    s = big / (2.0 * m.radius)
     parts.append(
-        f'<g opacity="0.07" transform="translate({num(1300 - bx1 * s)} {num(150 - by0 * s)}) '
-        f'scale({num(s)})">{mark_body(m, "mono", "#2F6FE4")}</g>'
+        f'<g opacity="0.08" transform="translate({num(1110 - m.cx * s)} {num(380 - m.cy * s)}) '
+        f'scale({num(s)})">{mark_body(m, "mono", PALETTE["light"]["glass"])}</g>'
     )
     body, lw, lh = lockup.horizontal(inter, "light", 56.0)
     parts.append(f'<g transform="translate(96 96)">{body}</g>')
@@ -136,28 +135,36 @@ def body_mask(size: int) -> Image.Image:
     return m
 
 
+ICON_BACKGROUNDS = {
+    "": ("#FFFFFF", "#ECEFF4"),
+    "-dark": ("#1B2A4A", "#0B1426"),
+}
+ICON_DIAMETER = 640.0
+
+
 def app_icon(out: Path) -> None:
+    """The mark as a silica-icons app icon.
+
+    The circle is 640 across, 1.067 times the 600 keyline: a circle drawn as wide as a square
+    looks smaller (it covers π/4 of the square's area), so it overshoots the keyline.
+    """
     d = out / "app-icon"
-    m = build(master())
-    s = 600.0 / (m.bbox[2] - m.bbox[0])
-    off = 512.0 - 32.0 * s
+    m = master()
+    s = ICON_DIAMETER / (2.0 * m.radius)
+    off = 512.0 - m.cx * s
     tr = f'translate({num(off)} {num(off)}) scale({num(s)})'
-    bgs = {
-        "": ("#FFFFFF", "#ECEFF4"),
-        "-dark": ("#3A3A3C", "#161618"),
-    }
-    for suffix, (a, b) in bgs.items():
+    for suffix, (a, b) in ICON_BACKGROUNDS.items():
         bg = (
             '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
             f'<stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{b}"/>'
             '</linearGradient></defs><rect width="1024" height="1024" fill="url(#g)"/>'
         )
         write(d / f"background{suffix}.svg", svg(1024, 1024, bg, "background"))
-        mode = "light" if suffix else "dark"
+        mode = "dark" if suffix else "light"
         fg = f'<g transform="{tr}">{mark_body(m, mode)}</g>'
         write(d / f"foreground{suffix}.svg", svg(1024, 1024, fg, "foreground"))
     manifest = {
-        "format": 1, "id": "silica", "name": "Silica", "kind": "app", "keyline": "square",
+        "format": 1, "id": "silica", "name": "Silica", "kind": "app", "keyline": "circle",
         "layers": [
             {"role": "background", "file": "background.svg"},
             {"role": "foreground", "file": "foreground.svg", "shadow": "neutral"},
@@ -174,54 +181,51 @@ def app_icon(out: Path) -> None:
 
 
 def construction(out: Path) -> None:
-    sp = master(1024)
-    m = build(sp)
-    p = []
-    p.append('<rect width="1024" height="1024" fill="#FFFFFF"/>')
+    """Construction drawing on the 1024 canvas (1 u = 16 px)."""
+    k = 16.0
+    m = master()
+    p = ['<rect width="1024" height="1024" fill="#FFFFFF"/>']
     for i in range(65):
         v = i * 16
-        strong = i % 8 == 0
-        c, w = ("#C9D2E0", 2) if strong else ("#E8ECF2", 1)
+        c, w = ("#C9D2E0", 2) if i % 8 == 0 else ("#E8ECF2", 1)
         p.append(f'<path stroke="{c}" stroke-width="{w}" d="M{v} 0V1024M0 {v}H1024"/>')
-    p.append(f'<g opacity="0.35">{mark_body(m, "light")}</g>')
-    p.append(f'<path fill="none" stroke="#16181C" stroke-width="2" d="{m.silhouette}"/>')
-    for f in m.faces.values():
-        p.append(f'<path fill="none" stroke="#2F6FE4" stroke-width="2" d="{f}"/>')
-    a, b, c = m.mid
-    p.append(f'<path fill="none" stroke="#E5484D" stroke-width="2" stroke-dasharray="10 8" '
-             f'd="M{num(a[0])} {num(a[1])}L{num(b[0])} {num(b[1])}L{num(c[0])} {num(c[1])}Z'
-             f'M{num(a[0])} {num(a[1])}L{num(m.junction[0])} {num(m.junction[1])}'
-             f'L{num(b[0])} {num(b[1])}M{num(m.junction[0])} {num(m.junction[1])}'
-             f'L{num(c[0])} {num(c[1])}"/>')
-    a, b, c = m.sharp
-    p.append(f'<path fill="none" stroke="#16181C" stroke-opacity="0.35" stroke-width="2" '
-             f'stroke-dasharray="4 6" d="M{num(a[0])} {num(a[1])}L{num(b[0])} {num(b[1])}'
-             f'L{num(c[0])} {num(c[1])}Z"/>')
-    x0, y0, x1, y1 = m.bbox
-    p.append(f'<rect x="{num(x0)}" y="{num(y0)}" width="{num(x1 - x0)}" height="{num(y1 - y0)}" '
-             f'fill="none" stroke="#8E44AD" stroke-width="2" stroke-dasharray="2 6"/>')
+    big = master(1024)
+    p.append(f'<g opacity="0.3">{mark_body(big, "light")}</g>')
+    r = m.radius * k
+    p.append(f'<circle cx="512" cy="512" r="{num(r)}" fill="none" stroke="#16181C" stroke-width="2"/>')
+    p.append(f'<path fill="none" stroke="#16181C" stroke-width="2" d="{glass_path(big)}"/>')
+    lattice = []
+    for c in range(-1, GRID.columns + 1):
+        x = column_x(32.0, GRID, c) * k
+        off = 0.5 if c % 2 else 0.0
+        for j in range(-8, 9):
+            y = (32.0 + (j + off) * GRID.pitch) * k
+            if (x - 512) ** 2 + (y - 512) ** 2 <= (r + 40) ** 2 and x < 512:
+                lattice.append(f'M{num(x - 5)} {num(y)}h10M{num(x)} {num(y - 5)}v10')
+    p.append(f'<path stroke="#E5484D" stroke-width="2" d="{"".join(lattice)}"/>')
+    for x, y, gr in big.grains:
+        p.append(f'<path fill="none" stroke="#A87432" stroke-width="2" d="{grain_path(x, y, gr)}"/>')
+    for c in range(GRID.columns):
+        x = column_x(32.0, GRID, c) * k
+        p.append(f'<path stroke="#8E44AD" stroke-width="1.5" stroke-dasharray="4 6" d="M{num(x)} 40V984"/>')
     p.append('<path stroke="#E5484D" stroke-width="2" d="M0 512H1024M512 0V1024" opacity="0.6"/>')
-    p.append(f'<circle cx="{num(m.junction[0])}" cy="{num(m.junction[1])}" r="8" fill="#E5484D"/>')
-    p.append(f'<circle cx="512" cy="{num((y0 + y1) / 2)}" r="8" fill="#8E44AD"/>')
     p.append('<circle cx="512" cy="512" r="8" fill="none" stroke="#16181C" stroke-width="3"/>')
     write(out / "construction" / "silica-mark-construction.svg", svg(1024, 1024, "".join(p), "Construction"))
 
 
-def clear_space(out: Path, inter: Inter) -> None:
-    m = build(master())
-    x0, y0, x1, y1 = m.bbox
-    H = 400.0
-    s = H / (y1 - y0)
-    pad = H / 4.0
-    mw = (x1 - x0) * s
-    W, Ht = mw + 2 * pad, H + 2 * pad
-    p = [f'<rect width="{num(W)}" height="{num(Ht)}" fill="#E5484D" fill-opacity="0.10"/>',
-         f'<rect x="{num(pad)}" y="{num(pad)}" width="{num(mw)}" height="{num(H)}" fill="#FFFFFF"/>',
-         f'<g transform="translate({num(pad - x0 * s)} {num(pad - y0 * s)}) scale({num(s)})">'
-         f'{mark_body(m, "mono", INK)}</g>',
-         f'<rect x="0.5" y="0.5" width="{num(W - 1)}" height="{num(Ht - 1)}" fill="none" '
+def clear_space(out: Path) -> None:
+    m = master()
+    D = 400.0
+    s = D / (2.0 * m.radius)
+    pad = D / 4.0
+    W = D + 2 * pad
+    p = [f'<rect width="{num(W)}" height="{num(W)}" fill="#E5484D" fill-opacity="0.10"/>',
+         f'<rect x="{num(pad)}" y="{num(pad)}" width="{num(D)}" height="{num(D)}" fill="#FFFFFF"/>',
+         f'<g transform="translate({num(pad - (m.cx - m.radius) * s)} {num(pad - (m.cy - m.radius) * s)}) '
+         f'scale({num(s)})">{mark_body(m, "mono", INK)}</g>',
+         f'<rect x="0.5" y="0.5" width="{num(W - 1)}" height="{num(W - 1)}" fill="none" '
          f'stroke="#E5484D" stroke-dasharray="6 6"/>']
-    write(out / "construction" / "silica-mark-clear-space.svg", svg(W, Ht, "".join(p), "Clear space"))
+    write(out / "construction" / "silica-mark-clear-space.svg", svg(W, W, "".join(p), "Clear space"))
 
 
 def main() -> None:
@@ -236,7 +240,7 @@ def main() -> None:
     banners(out, inter)
     app_icon(out)
     construction(out)
-    clear_space(out, inter)
+    clear_space(out)
 
 
 if __name__ == "__main__":
