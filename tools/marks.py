@@ -1,4 +1,4 @@
-"""SVG del marchio: colore su chiaro e su scuro, monocromo."""
+"""Mark SVGs: colour on light and on dark, monochrome."""
 from __future__ import annotations
 
 from geometry import Mark, Spec, build, master, num, SMALL

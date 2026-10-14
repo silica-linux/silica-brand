@@ -1,11 +1,11 @@
-"""Geometria del marchio di Silica (tetraedro SiO4 visto dall'alto).
+"""Geometry of the Silica mark (an SiO4 tetrahedron seen from above).
 
-Il marchio è costruito con soli riempimenti: la sagoma (triangolo equilatero con gli angoli
-arrotondati) meno le tre facce. Quello che resta (contorno e tre raggi verso il centro) è il
-monocromo; la versione a colori riempie le facce e colora il resto con il colore del bordo.
+The mark is built from fills only: the silhouette (an equilateral triangle with rounded corners)
+minus the three faces. What remains (the outline and the three spokes to the centre) is the
+monochrome mark; the colour mark fills the faces and paints the rest in the rim colour.
 
-Unità: quelle della tela della variante (64 per il disegno di riferimento, 16/24/32 per le
-varianti piccole, dove 1 unità = 1 pixel).
+Units: those of the variant's canvas (64 for the reference drawing, 16/24/32 for the small
+variants, where 1 unit = 1 pixel).
 """
 from __future__ import annotations
 
@@ -31,16 +31,16 @@ class Spec:
 
 
 def master(canvas: float = 64.0) -> Spec:
-    """Disegno di riferimento sulla tela 64.
+    """Reference drawing on the 64 canvas.
 
-    - sagoma larga 56 (margine 4 = 1/16 della tela per lato);
-    - spessore del contorno 5 (1/16 del lato del triangolo mediano, ≈ 0,089 della sagoma);
-    - raggi verso il centro 4,5 (0,9 del contorno: tre tratti che si incontrano a 120°
-      fanno un nodo che pesa più di uno spigolo);
-    - raggio esterno degli angoli 4 (0,8 del contorno), raggio delle facce 1,25 agli angoli
-      acuti e 1,5 al centro;
-    - centratura ottica: il punto a metà fra il centro del riquadro della sagoma e il suo
-      baricentro sta al centro della tela, cioè il riquadro sale di h/12.
+    - silhouette 56 wide (4 margin = 1/16 of the canvas per side);
+    - outline 5 thick;
+    - spokes to the centre 4.5 (0.9 of the outline: three strokes meeting at 120° make a
+      knot that weighs more than an edge);
+    - outer corner radius 4 (0.8 of the outline), face radius 1.25 at the acute corners and
+      1.5 at the centre;
+    - optical centring: the point halfway between the centre of the silhouette's bounding box
+      and its centroid sits at the centre of the canvas, so the box rises by h/12.
     """
     k = canvas / 64.0
     width = 56.0 * k
@@ -66,7 +66,7 @@ SMALL = {
 
 
 def line(p, q):
-    """Retta per p e q come (n, c) con n·x = c e n unitario."""
+    """Line through p and q as (n, c), with n·x = c and n a unit vector."""
     dx, dy = q[0] - p[0], q[1] - p[1]
     n = (-dy, dx)
     ln = math.hypot(*n)
@@ -75,7 +75,7 @@ def line(p, q):
 
 
 def toward(ln, point, d):
-    """Sposta la retta di d verso il punto."""
+    """Shift the line by d towards the point."""
     n, c = ln
     s = 1.0 if n[0] * point[0] + n[1] * point[1] > c else -1.0
     return n, c + s * d
@@ -88,7 +88,7 @@ def meet(a, b):
 
 
 def rounded(points, radii) -> str:
-    """Poligono convesso con gli angoli arrotondati, come tracciato SVG."""
+    """Convex polygon with rounded corners, as an SVG path."""
     n = len(points)
     segs = []
     for i in range(n):
@@ -114,6 +114,33 @@ def rounded(points, radii) -> str:
     return "".join(out)
 
 
+def rounded_bbox(points, radii) -> tuple:
+    """Bounding box of a convex polygon with rounded corners (arcs sampled)."""
+    xs, ys = [], []
+    n = len(points)
+    for i in range(n):
+        p0, p1, p2 = points[i - 1], points[i], points[(i + 1) % n]
+        r = radii[i]
+        u = (p0[0] - p1[0], p0[1] - p1[1])
+        v = (p2[0] - p1[0], p2[1] - p1[1])
+        lu, lv = math.hypot(*u), math.hypot(*v)
+        u, v = (u[0] / lu, u[1] / lu), (v[0] / lv, v[1] / lv)
+        ang = math.acos(max(-1.0, min(1.0, u[0] * v[0] + u[1] * v[1])))
+        bis = (u[0] + v[0], u[1] + v[1])
+        lb = math.hypot(*bis)
+        c = (p1[0] + bis[0] / lb * r / math.sin(ang / 2.0), p1[1] + bis[1] / lb * r / math.sin(ang / 2.0))
+        d = r / math.tan(ang / 2.0)
+        a = (p1[0] + u[0] * d - c[0], p1[1] + u[1] * d - c[1])
+        b = (p1[0] + v[0] * d - c[0], p1[1] + v[1] * d - c[1])
+        ta, tb = math.atan2(a[1], a[0]), math.atan2(b[1], b[0])
+        delta = (tb - ta + math.pi) % (2 * math.pi) - math.pi
+        for k in range(65):
+            t = ta + delta * k / 64
+            xs.append(c[0] + r * math.cos(t))
+            ys.append(c[1] + r * math.sin(t))
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
 def num(x: float) -> str:
     s = f"{x:.3f}".rstrip("0").rstrip(".")
     return "0" if s in ("-0", "") else s
@@ -131,6 +158,7 @@ class Mark:
     mid: tuple
     junction: tuple
     bbox: tuple
+    faces_bbox: tuple
 
 
 def build(spec: Spec) -> Mark:
@@ -176,4 +204,8 @@ def build(spec: Spec) -> Mark:
     sil = rounded([apex, br, bl], [r, r, r])
     trim = 2.0 * r * math.cos(math.radians(30)) - r
     bbox = (bl[0] + trim, spec.top, br[0] - trim, spec.bottom)
-    return Mark(sil, faces, (apex, br, bl), (m_apex, m_br, m_bl), j, bbox)
+    boxes = [rounded_bbox(left, [ri, ri, rc]), rounded_bbox(right, [ri, rc, ri]),
+             rounded_bbox(bottom, [rc, ri, ri])]
+    faces_bbox = (min(b[0] for b in boxes), min(b[1] for b in boxes),
+                  max(b[2] for b in boxes), max(b[3] for b in boxes))
+    return Mark(sil, faces, (apex, br, bl), (m_apex, m_br, m_bl), j, bbox, faces_bbox)

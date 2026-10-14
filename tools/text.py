@@ -1,6 +1,6 @@
-"""Testo in tracciati con Inter (OFL), impaginato con HarfBuzz.
+"""Text as outlines in Inter (OFL), shaped with HarfBuzz.
 
-Il font non è nel repository: si passa il percorso di Inter variabile (rsms/inter, v4).
+The font is not in the repository: pass the path of the Inter variable font (rsms/inter, v4).
 """
 from __future__ import annotations
 
@@ -80,8 +80,9 @@ class Inter:
                 top = gt if top is None else min(top, gt)
                 bottom = gb if bottom is None else max(bottom, gb)
             pen_x += pos.x_advance + (track if i < count - 1 else 0.0)
-        return Run("".join(parts), pen_x * s, left or x, right or x, top or baseline,
-                   bottom or baseline)
+        return Run("".join(parts), pen_x * s,
+                   x if left is None else left, x if right is None else right,
+                   baseline if top is None else top, baseline if bottom is None else bottom)
 
     def size_for_cap(self, cap_height: float) -> float:
         return cap_height * self.upem / self.cap

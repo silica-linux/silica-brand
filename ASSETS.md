@@ -1,71 +1,71 @@
-# Asset
+# Assets
 
-Ogni file grafico del repository ha una riga qui, con autore, licenza e fonte.
+Every graphic file in the repository has a row here, with author, licence and source.
 
-Licenza del marchio: da decidere (vedi `README.md`). Licenze ammesse per asset di terzi: CC0,
-CC-BY, CC BY-SA, OFL, MIT/Apache.
+Licence of the brand: to be decided (see `README.md`). Licences allowed for third-party assets:
+CC0, CC-BY, CC BY-SA, OFL, MIT/Apache.
 
-| Percorso | Autore | Licenza | Fonte |
+| Path | Author | Licence | Source |
 | --- | --- | --- | --- |
-| `design/silica-brand.sketch` | Progetto Silica | da decidere | originale, disegnato in Sketch; la pagina Icona contiene anteprime di icone di silica-icons (CC BY-SA 4.0) |
-| `exports/app-icon/background-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/background.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/foreground-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/foreground.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/icon.json` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/preview-dark.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/app-icon/preview.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` nel formato di silica-icons |
-| `exports/banners/mustache.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/mustache.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-brand.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-brand.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-desktop.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-desktop.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-icons.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-icons.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-os.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-os.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-packages.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-packages.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-setup.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/banners/silica-setup.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; testo in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/construction/silica-mark-clear-space.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/construction/silica-mark-construction.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/logotype/silica-logotype-horizontal-black.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-horizontal-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-horizontal-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-horizontal-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-horizontal-white.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-vertical-black.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-vertical-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-vertical-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-vertical-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/logotype/silica-logotype-vertical-white.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py`; nome in Inter (OFL 1.1, rsms/inter) convertito in tracciati |
-| `exports/mark/silica-mark-16-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-16-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-16-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-24-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-24-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-24-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-32-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-32-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-32-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-black.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-dark.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-light.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-mono.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/mark/silica-mark-white.svg` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-1024.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-128.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-16.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-256.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-32.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-512.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-dark-64.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-1024.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-128.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-16.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-256.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-32.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-512.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
-| `exports/png/silica-mark-light-64.png` | Progetto Silica | da decidere | originale, generato da `tools/build.py` |
+| `design/silica-brand.sketch` | Silica Project | to be decided | original, drawn in Sketch; the App Icon page contains previews of silica-icons icons (CC BY-SA 4.0) |
+| `exports/app-icon/background-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/background.svg` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/foreground-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/foreground.svg` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/icon.json` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/preview-dark.png` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/app-icon/preview.png` | Silica Project | to be decided | original, generated by `tools/build.py` in the silica-icons format |
+| `exports/banners/mustache.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/mustache.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-brand.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-brand.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-desktop.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-desktop.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-icons.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-icons.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-os.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-os.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-packages.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-packages.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-setup.png` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/banners/silica-setup.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; text in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/construction/silica-mark-clear-space.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/construction/silica-mark-construction.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/logotype/silica-logotype-horizontal-black.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-horizontal-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-horizontal-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-horizontal-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-horizontal-white.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-vertical-black.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-vertical-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-vertical-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-vertical-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/logotype/silica-logotype-vertical-white.svg` | Silica Project | to be decided | original, generated by `tools/build.py`; name in Inter (OFL 1.1, rsms/inter) converted to outlines |
+| `exports/mark/silica-mark-16-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-16-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-16-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-24-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-24-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-24-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-32-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-32-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-32-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-black.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-dark.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-light.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-mono.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/mark/silica-mark-white.svg` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-1024.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-128.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-16.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-256.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-32.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-512.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-dark-64.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-1024.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-128.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-16.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-256.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-32.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-512.png` | Silica Project | to be decided | original, generated by `tools/build.py` |
+| `exports/png/silica-mark-light-64.png` | Silica Project | to be decided | original, generated by `tools/build.py` |

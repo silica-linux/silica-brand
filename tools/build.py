@@ -1,10 +1,10 @@
-"""Genera le esportazioni di silica-brand.
+"""Build the silica-brand exports.
 
-Uso:
+Usage:
     python tools/build.py --inter <Inter-VariableFont_opsz,wght.ttf> [--out exports]
 
-Dipendenze: fonttools, uharfbuzz, resvg-py, pillow. Il font Inter (OFL, rsms/inter) non è
-nel repository.
+Dependencies: fonttools, uharfbuzz, resvg-py, pillow. The Inter font (OFL, rsms/inter) is not
+in the repository.
 """
 from __future__ import annotations
 
@@ -26,15 +26,15 @@ MUTED = "#4A4F57"
 FAINT = "#6A6F78"
 
 REPOS = {
-    "silica-desktop": "Il desktop: compositor Ossido, shell, demoni e strumenti",
-    "silica-icons": "Icone delle app e dei file (a livelli), simboli di sistema in tre pesi",
-    "silica-brand": "Logo, banner dei repository, sfondi delle versioni",
-    "silica-os": "La distro: immagine bootc sopra Fedora Atomic con i default di Silica, "
-                 "pipeline e ISO di installazione",
-    "silica-packages": "I pacchetti RPM (desktop, app, Inter, silica-icons) e la sessione "
-                       "Wayland installabile su Fedora",
-    "silica-setup": "L’assistente al primo avvio",
-    "mustache": "Il gestore dei file",
+    "silica-desktop": "The desktop: Ossido compositor, shell, daemons and tools",
+    "silica-icons": "App and file icons (layered), system symbols in three weights",
+    "silica-brand": "Logo, repository banners and release wallpapers",
+    "silica-os": "The distro: a bootc image on Fedora Atomic with Silica’s defaults, "
+                 "build pipeline and installer ISO",
+    "silica-packages": "RPM packages (desktop, apps, Inter, silica-icons) and the Wayland "
+                       "session, installable on Fedora",
+    "silica-setup": "The first-run setup assistant",
+    "mustache": "The file manager",
 }
 
 
@@ -153,7 +153,7 @@ def app_icon(out: Path) -> None:
             '</linearGradient></defs><rect width="1024" height="1024" fill="url(#g)"/>'
         )
         write(d / f"background{suffix}.svg", svg(1024, 1024, bg, "background"))
-        mode = "dark" if suffix else "light"
+        mode = "light" if suffix else "dark"
         fg = f'<g transform="{tr}">{mark_body(m, mode)}</g>'
         write(d / f"foreground{suffix}.svg", svg(1024, 1024, fg, "foreground"))
     manifest = {
@@ -204,7 +204,7 @@ def construction(out: Path) -> None:
     p.append(f'<circle cx="{num(m.junction[0])}" cy="{num(m.junction[1])}" r="8" fill="#E5484D"/>')
     p.append(f'<circle cx="512" cy="{num((y0 + y1) / 2)}" r="8" fill="#8E44AD"/>')
     p.append('<circle cx="512" cy="512" r="8" fill="none" stroke="#16181C" stroke-width="3"/>')
-    write(out / "construction" / "silica-mark-construction.svg", svg(1024, 1024, "".join(p), "Costruzione"))
+    write(out / "construction" / "silica-mark-construction.svg", svg(1024, 1024, "".join(p), "Construction"))
 
 
 def clear_space(out: Path, inter: Inter) -> None:
@@ -221,7 +221,7 @@ def clear_space(out: Path, inter: Inter) -> None:
          f'{mark_body(m, "mono", INK)}</g>',
          f'<rect x="0.5" y="0.5" width="{num(W - 1)}" height="{num(Ht - 1)}" fill="none" '
          f'stroke="#E5484D" stroke-dasharray="6 6"/>']
-    write(out / "construction" / "silica-mark-clear-space.svg", svg(W, Ht, "".join(p), "Area di rispetto"))
+    write(out / "construction" / "silica-mark-clear-space.svg", svg(W, Ht, "".join(p), "Clear space"))
 
 
 def main() -> None:
