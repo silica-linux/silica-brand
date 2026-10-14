@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img alt="license: to be decided" src="https://img.shields.io/badge/license-to%20be%20decided-8a8a8a?style=flat-square">
+  <img alt="license: trademark" src="https://img.shields.io/badge/license-trademark-3a3a3a?style=flat-square">
 </p>
 
 
@@ -179,7 +179,7 @@ venv/bin/python tools/build.py --inter <path>/Inter-VariableFont_opsz,wght.ttf
 
 ## Licence
 
-**To be decided.** A brand mark is usually not freely reusable: until a licence is chosen, the
-files in this repository are not to be used outside the Silica project. For the code in `tools/`
-the proposal is MIT OR Apache-2.0, as in the other repositories. Inter is OFL 1.1 and appears in
-the files only as outlines.
+The name and the logo are trademarks of the Silica project: the files are all rights reserved,
+and [`TRADEMARKS.md`](TRADEMARKS.md) says how they may be used (to refer to Silica, unmodified;
+not for modified versions or derived distributions). The code in `tools/` is MIT OR Apache-2.0,
+as in the other repositories. Inter is OFL 1.1 and appears in the files only as outlines.
