@@ -1,3 +1,5 @@
+![silica-brand](exports/banners/silica-brand.png)
+
 # silica-brand
 
 The brand of [Silica](https://github.com/silica-linux/silica-desktop): the logo (with the name set
