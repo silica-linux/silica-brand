@@ -16,12 +16,14 @@ from pathlib import Path
 import resvg_py
 from PIL import Image, ImageChops, ImageDraw
 
+import icon
 import lockup
 from geometry import GRID, SMALL, column_x, glass_path, grain_path, master, num
 from marks import INK, PAPER, PALETTE, mark_body, mark_for, mark_svg, svg
 from text import Inter
 
-PNG_SIZES = (16, 32, 64, 128, 256, 512, 1024)
+MARK_PNG_SIZES = (16, 32, 64)
+ICON_PNG_SIZES = (32, 64, 128, 256, 512, 1024)
 MUTED = "#4A4F57"
 FAINT = "#6A6F78"
 
@@ -59,11 +61,14 @@ def marks(out: Path) -> None:
         for mode in ("light", "dark", "mono"):
             write(d / f"silica-mark-{px}-{mode}.svg", mark_svg(SMALL[px], mode))
     for mode in ("light", "dark"):
-        for px in PNG_SIZES:
+        for px in MARK_PNG_SIZES:
             im = render(mark_svg(mark_for(px), mode, px=px), px)
             p = out / "png" / f"silica-mark-{mode}-{px}.png"
             p.parent.mkdir(parents=True, exist_ok=True)
             im.save(p)
+        for px in ICON_PNG_SIZES:
+            im = render(icon.svg(icon.icon(mode, px=px), "Silica"), px)
+            im.save(out / "png" / f"silica-icon-{mode}-{px}.png")
 
 
 def lockups(out: Path, inter: Inter) -> None:
@@ -106,7 +111,7 @@ def banner_svg(inter: Inter, repo: str, desc: str) -> str:
         f'<g opacity="0.08" transform="translate({num(1110 - m.cx * s)} {num(380 - m.cy * s)}) '
         f'scale({num(s)})">{mark_body(m, "mono", PALETTE["light"]["glass"])}</g>'
     )
-    body, lw, lh = lockup.horizontal(inter, "light", 56.0)
+    body, lw, lh = lockup.horizontal(inter, "light", 64.0)
     parts.append(f'<g transform="translate(96 96)">{body}</g>')
     name = inter.run(repo, 96, 600, -0.02, 96, 372, opsz=32)
     parts.append(f'<path fill="{INK}" d="{name.d}"/>')
@@ -135,34 +140,12 @@ def body_mask(size: int) -> Image.Image:
     return m
 
 
-ICON_BACKGROUNDS = {
-    "": ("#FFFFFF", "#ECEFF4"),
-    "-dark": ("#1B2A4A", "#0B1426"),
-}
-ICON_DIAMETER = 640.0
-
-
 def app_icon(out: Path) -> None:
-    """The mark as a silica-icons app icon.
-
-    The circle is 640 across, 1.067 times the 600 keyline: a circle drawn as wide as a square
-    looks smaller (it covers π/4 of the square's area), so it overshoots the keyline.
-    """
+    """The logo as a silica-icons app icon: layers, manifest and previews."""
     d = out / "app-icon"
-    m = master()
-    s = ICON_DIAMETER / (2.0 * m.radius)
-    off = 512.0 - m.cx * s
-    tr = f'translate({num(off)} {num(off)}) scale({num(s)})'
-    for suffix, (a, b) in ICON_BACKGROUNDS.items():
-        bg = (
-            '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">'
-            f'<stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{b}"/>'
-            '</linearGradient></defs><rect width="1024" height="1024" fill="url(#g)"/>'
-        )
-        write(d / f"background{suffix}.svg", svg(1024, 1024, bg, "background"))
-        mode = "dark" if suffix else "light"
-        fg = f'<g transform="{tr}">{mark_body(m, mode)}</g>'
-        write(d / f"foreground{suffix}.svg", svg(1024, 1024, fg, "foreground"))
+    for suffix, mode in (("", "light"), ("-dark", "dark")):
+        write(d / f"background{suffix}.svg", icon.svg(icon.background(mode), "background"))
+        write(d / f"foreground{suffix}.svg", icon.svg(icon.foreground(mode), "foreground"))
     manifest = {
         "format": 1, "id": "silica", "name": "Silica", "kind": "app", "keyline": "circle",
         "layers": [
