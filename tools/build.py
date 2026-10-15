@@ -121,7 +121,7 @@ def banner_svg(inter: Inter, repo: str, desc: str) -> str:
         r = inter.run(line, 34, 400, -0.01, 96, y)
         parts.append(f'<path fill="{MUTED}" d="{r.d}"/>')
         y += 48
-    foot = inter.run(f"github.com/silica-linux/{repo}", 24, 500, 0, 96, 560)
+    foot = inter.run(f"github.com/silica-os/{repo}", 24, 500, 0, 96, 560)
     parts.append(f'<path fill="{FAINT}" d="{foot.d}"/>')
     return svg(w, h, "".join(parts), repo)
 

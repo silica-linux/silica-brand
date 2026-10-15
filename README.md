@@ -17,7 +17,7 @@
 </p>
 
 
-The brand of [Silica](https://github.com/silica-linux/silica-desktop): the logo (with the name set
+The brand of [Silica](https://github.com/silica-os/silica-desktop): the logo (with the name set
 in Inter), the repository banners and the desktop wallpapers. Every file has its row in
 `ASSETS.md` (author, licence, source).
 
